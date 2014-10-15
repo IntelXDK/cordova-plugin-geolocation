@@ -1,0 +1,67 @@
+This repo is an example of a plugin that embeds code for emulation under Ripple.
+It is intended for use in conjunction with a prototype version of Ripple that
+is available in this repo:
+    https://github.com/IntelXDK/incubator-ripple
+This repo is itself a fork of the official Ripple home repo, which is
+    https://github.com/apache/incubator-ripple
+
+The prototype Ripple emulator presumes the existence of a prototype
+Cordova CLI that is available in this repo:
+    https://github.com/msopentech/cordova-cli
+The prototype CLI recognizes "ripple" as a valid platform name.
+Please see the readme information in this repo for instructions on how to
+install the modified CLI.  The modified Ripple emulator expects to find the
+"cordova" CLI command on the path.
+
+Here is some background, for those who aren't that familiar with Ripple and
+how it emulates Cordova plugins and their APIs.
+
+Ripple is a software testing tool used with HTML5 mobile applications,
+especially ones that use Cordova plugins.  It allows such applications to run
+on the host system.  This enables a highly efficient form of preliminary
+testing without real hardware.
+
+Ripple calls itself an "emulator" because it creates a run time environment
+that looks to the program under like the selected emulation device. But Ripple
+is not an instruction-level emulator so it can't execute native code.
+It would actually be more accurate to call Ripple a functional simulator.
+
+Ripple is itself a web application that runs in a Chrome browser.  The Ripple
+user interface consists of two main parts: an inner frame where the program
+under test runs, and an outer frame consisting of the emulator's UI.  The
+emulator UI allows the user to select the device to be emulated and to control
+the parameters of the virtual environment in which the program under test runs.
+
+To take Geolocation as an example, the emulator user interface contains a
+mapping widget that allows you to specify the virtual location that will be
+seen by the program under test when it calls the Geolocation API.
+
+The implementation of the Geolocation plugin (the code in this repo) consists
+of two parts: a JavaScript part that implements the functions in the Geolocation
+API (such as getCurrentPosition), and a native code part that provides access
+to the GPS hardware. Generally the JavaScript layer is the same for each
+platform and the native layer is different for each platform.  The JavaScript
+layer invokes the native code layer through the Cordova "exec" function.
+
+Under emulation provides its own emulation-time stand-in for the native code
+and intercepts the "exec" function so the JavaScript layer of the plugin
+will be none the wiser. Today this implementation is built into the emulator.
+If the native API changes or new native functionality is added one must update
+the emulator accordingly.
+
+This prototype explores an alternative model. In this model the emulation-time
+code specific to the Geolocation plugin is embedded in the plugin itself.
+This consists of the emulation-time implementation of the native code part of
+the Geolocation plugin, the emulator UI that contains the mapping widget
+referred to earlier, and the glue that connects them together.  The prototype
+version of Ripple discovers the emulation-time code inside the selected plugins
+and dynamically merges it into the emulator.  This makes it possible to extend
+the native part of a plugin without having to update the emulator.
+
+In a typical plugin the "src" directory contains the native code part of the
+plugin.  For example, "src/ios" contain the native code for the ios platform.
+In the spirit of thinking of ripple as a platform, the emulation-time code for
+the plugin appears below "src/ripple"
+
+For more information about how the prototype Ripple works, refer to its 
+repository.

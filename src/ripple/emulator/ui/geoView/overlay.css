@@ -1,0 +1,76 @@
+/* ------------------------------>
+    UI.Geo */
+
+#geo-map {
+    position: relative;
+    padding: 10px 0;
+    width: 316px;
+    height: 316px;
+    overflow: hidden;
+}
+
+#geo-map-container {
+    width: 316px;
+    height: 316px;
+    z-index: 0;
+}
+
+#geo-map-img {
+    top: -80px;
+    left: -80px;
+    position: relative;
+}
+
+#geo-map-arrow {
+    width: 32px;
+    height: 32px;
+    background: url(images/compass.png);
+    float: left;
+    margin-top: 5px;
+}
+
+#geo-map-direction-label {
+    margin-left: 35px;
+    z-index: 800;
+}
+
+#geo-map-direction {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 90px;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #000;
+    background-color: rgba(180,180,180,0.7);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 800;
+}
+
+#geo-map-marker {
+    position: absolute;
+    top: 158px;
+    left: 143px;
+    background: url(images/arrow.png);
+    width: 22px;
+    height: 30px;
+    z-index: 800;
+}
+
+.geo-map-zoom-btn {
+    font-weight: bold;
+}
+
+.geo-map-zoom-controls {
+    position: relative;
+    margin-top: 10px;
+}
+
+.geo-map-zoomlevel {
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+

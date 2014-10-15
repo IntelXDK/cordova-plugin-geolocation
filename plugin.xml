@@ -245,4 +245,58 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             <clobbers target="navigator.geolocation" />
         </js-module>
     </platform>
+
+    <!-- ripple emulator -->
+    <platform name="ripple">
+
+        <!-- Files that define the JavaScript part of the API (same as a typical platform) -->
+
+        <js-module src="www/Coordinates.js" name="Coordinates">
+            <clobbers target="Coordinates" />
+        </js-module>
+
+        <js-module src="www/PositionError.js" name="PositionError">
+            <clobbers target="PositionError" />
+        </js-module>
+
+        <js-module src="www/Position.js" name="Position">
+            <clobbers target="Position" />
+        </js-module>
+
+        <js-module src="www/geolocation.js" name="geolocation">
+            <clobbers target="navigator.geolocation" />
+        </js-module>
+
+        <!-- Files used to Emulate the native layer -->
+        <!-- All these files are copied to platforms/ripple/www/plugins/org.apache.cordova.geolocation/src/ripple -->
+
+        <js-module src="src/ripple/geolocation.js" name="rippleGeolocation" >
+            <!-- Access via cordova.require('org.apache.cordova.geolocation.rippleGeolocation')  -->
+            <runs />
+        </js-module>
+
+        <!-- Emulator extensions to support API emulation -->
+        <!-- These files run in the JavaScript context of the emulator, not the program under test. -->
+        <!-- Therefore they cannot be loaded as js-modules. -->
+
+        <!-- Access via ripple('org.apache.cordova.geolocation.geo')  -->
+        <asset src="src/ripple/emulator/geo.js"
+            target="plugins/org.apache.cordova.geolocation/src/ripple/emulator/geo.js" />
+
+        <asset src="src/ripple/emulator/ui/geoView.js"
+            target="plugins/org.apache.cordova.geolocation/src/ripple/emulator/ui/geoView.js" />
+
+        <asset src="src/ripple/emulator/ui/geoView/overlay.css"
+            target="plugins/org.apache.cordova.geolocation/src/ripple/emulator/ui/geoView/overlay.css" />
+
+        <asset src="src/ripple/emulator/ui/geoView/images/arrow.png"
+            target="plugins/org.apache.cordova.geolocation/src/ripple/emulator/ui/geoView/images/arrow.png" />
+        <asset src="src/ripple/emulator/ui/geoView/images/compass.png"
+            target="plugins/org.apache.cordova.geolocation/src/ripple/emulator/ui/geoView/images/compass.png" />
+
+        <asset src="src/ripple/emulator/ui/geoView/panel.html"
+            target="plugins/org.apache.cordova.geolocation/src/ripple/emulator/ui/geoView/panel.html" />
+
+    </platform>
+
 </plugin>
